@@ -13,6 +13,7 @@ const controls = [
 const BuildControls = ({ 
     onIngredientAdded,
     onIngredientRemoved,
+    onOrdered,
     disabled,
     price,
     purchasable,
@@ -31,6 +32,7 @@ const BuildControls = ({
         <button 
             className={styles.OrderButton}
             disabled={!purchasable}
+            onClick={onOrdered}
         >ORDER NOW</button>
     </div>
 );
