@@ -2,7 +2,8 @@ import React from 'react';
 
 import Button from '../../UI/Button/Button';
 
-const OrderSummary = ({ 
+const OrderSummary = ({
+    price,
     ingredients,
     onPurchaseCancelled,
     onPurchaseContinued,
@@ -22,7 +23,8 @@ const OrderSummary = ({
             <ul>
                 {ingredientSummary}
             </ul>
-            <p>Continue to Checkout</p>
+            <p><strong>Total Price: {price.toFixed(2)}</strong></p>
+            <p>Continue to Checkout?</p>
             <Button btnType="Danger" clicked={onPurchaseCancelled}>CANCEL</Button>
             <Button btnType="Success" clicked={onPurchaseContinued}>CONTINUE</Button>
         </React.Fragment>
