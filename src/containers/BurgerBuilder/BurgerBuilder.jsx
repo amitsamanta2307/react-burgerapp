@@ -13,7 +13,6 @@ import * as actionTypes from '../../store/actions';
 
 class BurgerBuilder extends React.Component {
     state = {
-        purchasable: false,
         purchasing: false,
         loading: false,
         error: false,
@@ -40,7 +39,7 @@ class BurgerBuilder extends React.Component {
                 return sum + el;
             }, 0 );
 
-        this.setState({ purchasable: sum > 0 });
+        return sum > 0;
     };
 
     // addIngredientHandler = (type) => {
@@ -90,16 +89,17 @@ class BurgerBuilder extends React.Component {
 
     purchaseContinueHandler = () => {
         // console.log("Continue");
-        const queryParams = [];
-        for (let i in this.state.ingredients) {
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
-        }
-        queryParams.push(`price=${this.state.totalPrice}`);
-        const queryString = queryParams.join('&');
-        this.props.history.push({
-            pathname: '/checkout',
-            search: '?' + queryString 
-        });
+        // const queryParams = [];
+        // for (let i in this.state.ingredients) {
+        //     queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
+        // }
+        // queryParams.push(`price=${this.state.totalPrice}`);
+        // const queryString = queryParams.join('&');
+        // this.props.history.push({
+        //     pathname: '/checkout',
+        //     search: '?' + queryString 
+        // });
+        this.props.history.push('/checkout');
     };
 
     render () {
@@ -123,7 +123,7 @@ class BurgerBuilder extends React.Component {
                         onIngredientRemoved={this.props.onIngredientRemoved}
                         disabled={disabledInfo}
                         price={this.props.totalPrice}
-                        purchasable={this.state.purchasable}
+                        purchasable={this.updatePurchaseState(this.props.ingredients)}
                         onOrdered={this.purchaseHandler}
                     />
                 </React.Fragment>
