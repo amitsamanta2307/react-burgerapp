@@ -12,7 +12,8 @@ import withErrorHandler from '../../hoc/withErrorHandler/withErrorHandler';
 import {
     addIngredient,
     removeIngredient,
-    initIngredients
+    initIngredients,
+    purchaseInit,
 } from '../../store/actions';
 
 class BurgerBuilder extends React.Component {
@@ -95,6 +96,7 @@ class BurgerBuilder extends React.Component {
         //     pathname: '/checkout',
         //     search: '?' + queryString 
         // });
+        this.props.onInitPurchase();
         this.props.history.push('/checkout');
     };
 
@@ -150,9 +152,9 @@ class BurgerBuilder extends React.Component {
 
 const mapStateToProps = state => {
     return {
-        ingredients: state.ingredients,
-        totalPrice: state.totalPrice,
-        error: state.error
+        ingredients: state.burgerBuilder.ingredients,
+        totalPrice: state.burgerBuilder.totalPrice,
+        error: state.burgerBuilder.error
     }
 };
 
@@ -161,6 +163,7 @@ const mapDispatchToProps = dispatch => {
         onIngredientAdded: (ingName) => dispatch(addIngredient(ingName)),
         onIngredientRemoved: (ingName) => dispatch(removeIngredient(ingName)),
         onInitIngredients: () => dispatch(initIngredients()),
+        onInitPurchase: () => dispatch(purchaseInit()),
     }
 };
 
