@@ -4,32 +4,8 @@ import { connect } from 'react-redux';
 
 import CheckoutSummary from '../../components/Order/CheckoutSummary/CheckoutSummary';
 import ContactData from './ContactData/ContactData';
-import { purchaseInit } from '../../store/actions';
 
 class Checkout extends React.Component {
-    // state = {
-    //     ingredients: null,
-    //     totalPrice: 0,
-    // }
-
-    // componentWillMount() {
-    //     const searchParams = new URLSearchParams(this.props.location.search);
-    //     const ingredients = {};
-    //     let price = 0;
-
-    //     for (let pair of searchParams.entries()) {
-    //         if (pair[0] === 'price') {
-    //             price = pair[1];
-    //         } else {
-    //             ingredients[pair[0]] = +pair[1];
-    //         }
-    //     }
-    //     this.setState({ ingredients: ingredients, totalPrice: price });
-    // }
-
-    componentWillMount() {
-        this.props.onInitPurchase();
-    }
 
     handleCheckoutCancel = () => {
         this.props.history.goBack();
@@ -72,10 +48,4 @@ const mapStateToProps = state => {
     };
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        onInitPurchase: () => dispatch(purchaseInit())
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default connect(mapStateToProps)(Checkout);
