@@ -12,7 +12,15 @@ import Spinner from '../../components/UI/Spinner/Spinner';
 
 import styles from './Auth.module.css';
 
-const Auth = props => {
+const Auth = ({
+    error,
+    loading,
+    buildingBurger,
+    authRedirectPath,
+    isAuthenticated,
+    onAuth,
+    onSetAuthRedirectPath
+}) => {
     const [authForm, setAuthForm] = useState({
         email: {
             elementType: 'input',
@@ -46,10 +54,10 @@ const Auth = props => {
     const [isSignup, setIsSignup] = useState(true);
 
     useEffect(() => {
-        if (!props.buildingBurger && props.authRedirectPath !== '/') {
-            props.onSetAuthRedirectPath();
+        if (!buildingBurger && authRedirectPath !== '/') {
+            onSetAuthRedirectPath();
         }
-    }, []);
+    }, [buildingBurger, authRedirectPath, onSetAuthRedirectPath]);
 
     const handleInputChange = (event, controlName) => {
         const updatedControls = updateObject(authForm, {
@@ -64,7 +72,7 @@ const Auth = props => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        props.onAuth(
+        onAuth(
             authForm.email.value,
             authForm.password.value,
             isSignup
@@ -97,20 +105,20 @@ const Auth = props => {
         />
     ));
 
-    if (props.loading) {
+    if (loading) {
         form = <Spinner />
     }
 
     let errorMessage = null;
-    if (props.error) {
+    if (error) {
         errorMessage = (
-            <span>{props.error.message}</span>
+            <span>{error.message}</span>
         );
     }
 
     let authRedirect = null;
-    if (props.isAuthenticated) {
-        authRedirect = <Redirect to={props.authRedirectPath} />
+    if (isAuthenticated) {
+        authRedirect = <Redirect to={authRedirectPath} />
     }
     return (
         <div className={styles.Auth}>
