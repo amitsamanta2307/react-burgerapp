@@ -1,13 +1,18 @@
 import axios from 'axios';
-import { delay, put } from 'redux-saga/effects';
+import { call, delay, put } from 'redux-saga/effects';
 
 import * as actions from '../actions/auth';
 
 // generators
 export function* logoutSaga (action) {
-    yield localStorage.removeItem('token');
-    yield localStorage.removeItem('expirationDate');
-    yield localStorage.removeItem('userId');
+    // call() make the it testable with mock
+    yield call([localStorage, 'removeItem'], 'token');
+    yield call([localStorage, 'removeItem'], 'expirationDate');
+    yield call([localStorage, 'removeItem'], 'userId');
+    
+    // yield localStorage.removeItem('token');
+    // yield localStorage.removeItem('expirationDate');
+    // yield localStorage.removeItem('userId');
 
     yield put (actions.authLogout());
 }
