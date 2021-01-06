@@ -1,5 +1,10 @@
 import React from 'react';
-import { Route, Switch, withRouter, Redirect } from 'react-router-dom';
+import {
+  Redirect,
+  Route,
+  Switch,
+  withRouter
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 // import asyncComponent from './hoc/asyncComponent/asyncComponent';
 
