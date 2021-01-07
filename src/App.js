@@ -28,7 +28,7 @@ const App = ({ isAuthenticated, onTryAutoSignup }) => {
 
   useEffect(() => {
     onTryAutoSignup();
-  }, []);
+  }, [onTryAutoSignup]);
 
 
   let routes = (
